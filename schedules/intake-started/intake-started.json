@@ -1,0 +1,19 @@
+{
+  "account_id": null,
+  "agent_name": "POD_DEFAULT",
+  "config": {
+    "operations": [
+      "INSERT"
+    ],
+    "table_name": "intake_jobs"
+  },
+  "connector_trigger_id": null,
+  "filter_instruction": null,
+  "filter_output_schema": null,
+  "instruction": "A brand intake job was just created. The row is in this event and its id is in start.metadata.record_id. Acquire the brand from its source_ref, following your standing instruction: keep status and activity current as you go, write the theme, guidelines, assets and evidence under the brand's root_path, then close the job.",
+  "is_active": true,
+  "name": "intake-started",
+  "schedule_type": "DATASTORE",
+  "visibility": "POD",
+  "workflow_name": null
+}

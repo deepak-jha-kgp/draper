@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Social post</title>
+<!-- Brand-neutral by contract. Every value here is a --brand-* token that the
+     brand's own theme.css defines. A literal colour or font name in this file
+     is a bug: it would survive into every brand that ever used the template. -->
+<link rel="stylesheet" href="theme.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--brand-surface);
+    color: var(--brand-ink);
+    font-family: var(--brand-font-body);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* 1080 square. The renderer screenshots at this size and checks it on a
+     phone, because that is where it will be seen. */
+  .post {
+    width: 1080px; height: 1080px;
+    padding: 96px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    position: relative; overflow: hidden;
+  }
+  .post__mark { height: 44px; width: auto; display: block; }        /* slot: logo */
+  .post__eyebrow {
+    font-family: var(--brand-font-mono);
+    font-size: 20px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--brand-muted); margin: 0 0 28px;
+  }
+  .post__headline {                                                  /* slot: headline */
+    font-family: var(--brand-font-display);
+    font-size: 88px; line-height: 1.02; letter-spacing: -0.02em;
+    margin: 0; max-width: 20ch;
+  }
+  .post__support { font-size: 30px; line-height: 1.4; color: var(--brand-muted);
+    margin: 32px 0 0; max-width: 34ch; }                             /* slot: support */
+  .post__foot { display: flex; align-items: center; justify-content: space-between;
+    gap: 24px; border-top: 1px solid var(--brand-line); padding-top: 28px; }
+  .post__cta {
+    background: var(--brand-accent); color: var(--brand-accent-ink);
+    border-radius: var(--brand-radius-md);
+    padding: 18px 30px; font-size: 24px;
+  }
+  .post__url { font-family: var(--brand-font-mono); font-size: 22px; color: var(--brand-muted); }
+</style>
+</head>
+<body>
+  <article class="post">
+    <header><img class="post__mark" src="logo.svg" alt=""></header>
+    <div>
+      <p class="post__eyebrow">Eyebrow</p>
+      <h1 class="post__headline">The one sentence this post exists to say.</h1>
+      <p class="post__support">One supporting line. Cut it if the headline already lands.</p>
+    </div>
+    <footer class="post__foot">
+      <span class="post__cta">Call to action</span>
+      <span class="post__url">example.com</span>
+    </footer>
+  </article>
+</body>
+</html>

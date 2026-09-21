@@ -1,0 +1,97 @@
+/* The app's own palette. The one file where a literal colour belongs.
+ *
+ * Dark by default, because this is a studio tool you sit in for an hour, and
+ * because a dark warm chrome is the most forgiving ground to show somebody
+ * else's brand against. Light is opt-in, not the other way round.
+ *
+ * Every ratio below is produced by `node scripts/contrast.mjs`, not estimated,
+ * and every pair clears AA for body text in both appearances.
+ *
+ * THE RULE THAT MATTERS MOST: none of these are the customer's brand. Their
+ * colours live in --brand-* and appear only inside a canvas or a swatch —
+ * scripts/check-design.mjs fails the build if they leak into the chrome.
+ */
+
+:root {
+  color-scheme: dark;
+
+  /* Warm olive-black, not grey. Nothing here is neutral #111 — a cold chrome
+   * makes every warm brand look dirty next to it. */
+  --chrome: #11120F;
+  --panel: #191A16;
+  --panel-2: #20211C;
+  --sunk: #0C0D0A;
+
+  --ink: #F3F0E7;    /* 16.49:1 on chrome · 15.35:1 on panel */
+  --ink-2: #9B9C92;  /*  6.77:1 on chrome ·  6.30:1 on panel */
+  --ink-3: #8A8C83;  /*  5.51:1 on chrome ·  5.13:1 on panel — the floor */
+
+  --line: rgba(243, 240, 231, 0.09);
+  --line-2: rgba(243, 240, 231, 0.17);
+  --hover: rgba(243, 240, 231, 0.05);
+
+  /* One accent, about four times per screen. Acid lime reads unmistakably as
+   * *the tool* — no company's brand is this colour, which is exactly why it
+   * can sit beside every company's brand without being mistaken for it. */
+  --accent: #C7FF4A;     /* 15.96:1 on chrome */
+  --on-accent: #152000;  /* 14.40:1 on accent */
+  --accent-wash: rgba(199, 255, 74, 0.10);
+  --accent-line: rgba(199, 255, 74, 0.34);
+
+  --ok: #8FDCA2;  /* 10.77:1 on panel */
+  --bad: #FF8F7F; /*  7.90:1 on panel */
+  --on-ok: #0C1A10;
+  --on-bad: #2A0B05;
+
+  --shadow: 0 14px 40px rgba(0, 0, 0, .34);
+
+  /* The mat an artifact sits on, when the brand has not said otherwise. */
+  --workspace: #2B2C27;
+  --workspace-dot: rgba(243, 240, 231, 0.07);
+
+  /* Three faces, one job each. */
+  --face-ui: "Schibsted Grotesk", system-ui, -apple-system, sans-serif;
+  --face-read: "Newsreader", Iowan Old Style, Georgia, serif;
+  --face-mono: "DM Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --r-sm: 7px;
+  --r-md: 10px;
+  --r-lg: 16px;
+
+  --rail: 228px;
+  --topbar: 56px;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --chrome: #EFEDE6;
+  --panel: #F8F6F0;
+  --panel-2: #FFFDF8;
+  --sunk: #E4E2DA;
+
+  --ink: #20211D;    /* 13.82:1 on chrome · 14.99:1 on panel */
+  --ink-2: #5E5F57;  /*  5.52:1 on chrome ·  5.98:1 on panel */
+  --ink-3: #66675E;  /*  4.89:1 on chrome ·  5.30:1 on panel */
+
+  --line: rgba(32, 33, 29, 0.10);
+  --line-2: rgba(32, 33, 29, 0.19);
+  --hover: rgba(32, 33, 29, 0.055);
+
+  /* A fill carries the ink paired with it. The acid lime that reads on black
+   * is invisible on cream, so light mode takes it down to an olive that clears
+   * AA both ways — and the ink on it is the near-white, measured, not assumed. */
+  --accent: #4E7209;     /* 4.80:1 on chrome */
+  --on-accent: #FFFDF8;  /* 5.53:1 on accent */
+  --accent-wash: rgba(78, 114, 9, 0.09);
+  --accent-line: rgba(78, 114, 9, 0.30);
+
+  --ok: #2F6E4F; /* 5.61:1 on panel */
+  --bad: #A8321F; /* 6.19:1 on panel */
+  --on-ok: #FFFDF8;
+  --on-bad: #FFFDF8;
+
+  --shadow: 0 14px 40px rgba(32, 33, 29, .16);
+  --workspace: #D9D7D0;
+  --workspace-dot: rgba(32, 33, 29, 0.12);
+}

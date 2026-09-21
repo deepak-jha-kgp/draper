@@ -1,0 +1,85 @@
+/* The preview canvas. The artifact renders in an iframe carrying its own
+ * inlined theme.css, so everything inside it is the customer's.
+ *
+ * ALLOWED to carry --brand-* (see scripts/check-design.mjs): the mat is tinted
+ * from the brand's own surface so the piece sits on its own ground rather than
+ * floating on the tool's chrome. */
+
+.canvas {
+  position: relative;
+  height: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  /* A dotted mat, the way a design tool shows "this is a surface, not a page".
+   * The brand's own surface tints it when we know it; otherwise the tool's. */
+  background-color: var(--brand-surface, var(--workspace));
+  transition: background-color .2s ease;
+  background-image: radial-gradient(var(--workspace-dot) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+/* The stage is the artifact's scaled footprint. The iframe keeps its natural
+ * size and is transformed, because scaling the iframe's own box would reflow
+ * the piece instead of shrinking it — a 1080px post would relayout as a 500px
+ * one and stop being a preview of what was committed. */
+.canvas__stage { position: relative; box-shadow: var(--shadow); }
+.canvas__frame {
+  border: 0; background: transparent;
+  transform-origin: top left; display: block;
+}
+
+/* Notes render ON the mat, which may be the brand's own light surface — so
+ * they take an ink that is legible there rather than the chrome's. */
+.canvas__note {
+  display: flex; align-items: center; gap: 9px;
+  font-family: var(--face-mono); font-size: 12px; text-align: center;
+  color: var(--brand-muted, var(--ink-3));
+}
+
+/* Showing the brand's DARK theme: its dark values live in the artifact's own
+ * theme.css, not in `brands.tokens`, which only carries the light set. Tinting
+ * the mat from the light surface then puts a dark piece on a cream ground —
+ * the same mismatch this switch exists to fix, inverted. With nothing honest to
+ * tint with, fall back to the tool's own workspace, which is already dark. */
+.studio__stage[data-appearance="dark"] .canvas {
+  background-color: var(--workspace);
+}
+.studio__stage[data-appearance="dark"] .canvas__note,
+.studio__stage[data-appearance="dark"] .canvas__readout {
+  color: var(--ink-3);
+}
+
+/* Dimensions and zoom, the way a design tool tells you what you are looking at
+ * — and the answer to "is this the real size?", which the scaling raises.
+ *
+ * Positioned OUT of flow on purpose: in the layout it added height that the fit
+ * calculation had not accounted for, so the content overflowed the mat and the
+ * readout itself was the part clipped away. */
+.canvas__readout {
+  position: absolute; right: 14px; bottom: 11px;
+  margin: 0;
+  color: var(--brand-muted, var(--ink-3));
+  opacity: .7;
+  pointer-events: none;
+}
+
+/* Appearance switch. A brand that ships a dark theme should be checked in it,
+ * and a preview that silently follows the OS is how a light post ends up shown
+ * as dark on a light mat — which is exactly what it did before this existed. */
+.appearance { display: flex; gap: 4px; align-items: center; }
+.appearance__btn {
+  font-family: var(--face-mono); font-size: 11px;
+  padding: 3px 9px; border-radius: var(--r-sm);
+  border: 1px solid transparent; background: none; color: var(--ink-3); cursor: pointer;
+}
+.appearance__btn[aria-pressed="true"] {
+  border-color: var(--accent-line); color: var(--ink); background: var(--accent-wash);
+}

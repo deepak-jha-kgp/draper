@@ -1,0 +1,4 @@
+{
+  "description": "Read into every agent run. Pointers and standing rules only \u2014 it is capped.",
+  "visibility": "POD"
+}

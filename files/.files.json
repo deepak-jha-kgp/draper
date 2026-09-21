@@ -1,0 +1,52 @@
+{
+  "files": [
+    {
+      "description": null,
+      "path": "/memory/acquiring-a-brand.md",
+      "search_enabled": true,
+      "visibility": "POD"
+    },
+    {
+      "description": null,
+      "path": "/memory/AGENTS.md",
+      "search_enabled": true,
+      "visibility": "POD"
+    },
+    {
+      "description": null,
+      "path": "/memory/agents/pod-default/AGENTS.md",
+      "search_enabled": true,
+      "visibility": "POD"
+    },
+    {
+      "description": null,
+      "path": "/templates/one-pager/index.html",
+      "search_enabled": false,
+      "visibility": "POD"
+    },
+    {
+      "description": null,
+      "path": "/templates/social-post/index.html",
+      "search_enabled": false,
+      "visibility": "POD"
+    },
+    {
+      "description": null,
+      "path": "/memory/agents/pod-default/lemma-brand-state.md",
+      "search_enabled": true,
+      "visibility": "POD"
+    },
+    {
+      "description": null,
+      "path": "/memory/making-a-piece.md",
+      "search_enabled": true,
+      "visibility": "POD"
+    },
+    {
+      "description": null,
+      "path": "/memory/agents/pod-default/piece-pipeline.md",
+      "search_enabled": true,
+      "visibility": "POD"
+    }
+  ]
+}

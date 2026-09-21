@@ -1,0 +1,14 @@
+{
+  "code": {
+    "$file": "code.py"
+  },
+  "config": null,
+  "description": "Fetch a public web page and return ranked brand candidates: CSS custom properties, colours, font stacks, radii, logo and icon URLs, plus a warning when the page is JS-rendered.",
+  "icon_url": null,
+  "name": "extract_site_style",
+  "permissions": {
+    "grants": []
+  },
+  "type": "API",
+  "visibility": "POD"
+}

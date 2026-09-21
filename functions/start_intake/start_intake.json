@@ -1,0 +1,33 @@
+{
+  "code": {
+    "$file": "code.py"
+  },
+  "config": null,
+  "description": "Open brand acquisition: upsert the brand row and queue an intake job in one step, so a half-created brand is never observable. Both chat and the app call this.",
+  "icon_url": null,
+  "name": "start_intake",
+  "permissions": {
+    "grants": [
+      {
+        "permission_ids": [
+          "datastore.record.read",
+          "datastore.record.write",
+          "datastore.table.read"
+        ],
+        "resource_name": "brands",
+        "resource_type": "datastore_table"
+      },
+      {
+        "permission_ids": [
+          "datastore.record.read",
+          "datastore.record.write",
+          "datastore.table.read"
+        ],
+        "resource_name": "intake_jobs",
+        "resource_type": "datastore_table"
+      }
+    ]
+  },
+  "type": "API",
+  "visibility": "POD"
+}

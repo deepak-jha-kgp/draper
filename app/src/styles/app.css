@@ -1,0 +1,355 @@
+/* The shell and the screens. Chrome only — no --brand-* lives here; see
+ * scripts/check-design.mjs and DESIGN.md for why that is a hard rule. */
+
+@import url("https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=DM+Mono:wght@400;500&display=swap");
+@import "./tokens.css";
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  background: var(--chrome);
+  color: var(--ink);
+  font-family: var(--face-ui);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Weight never exceeds 500. Hierarchy comes from size and the space above it. */
+h1, h2, h3, h4, strong, b, th { font-weight: 500; }
+h1, h2, h3, h4 { margin: 0; letter-spacing: -0.02em; line-height: 1.14; }
+p { margin: 0; }
+a { color: inherit; }
+
+/* Everything you press moves. It is one line of CSS and it is most of the
+ * difference between a tool that feels alive and a form that feels dead. */
+button, input, textarea, select { font: inherit; color: inherit; }
+button {
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .11s ease, background-color .16s ease,
+              border-color .16s ease, color .16s ease, opacity .16s ease;
+}
+button:not(:disabled):active { transform: translateY(1px) scale(.978); }
+button:disabled { cursor: not-allowed; opacity: .5; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.mono { font-family: var(--face-mono); font-size: 12px; letter-spacing: .02em; }
+.muted { color: var(--ink-2); }
+.meta {
+  font-family: var(--face-mono); font-size: 11px; color: var(--ink-3);
+  letter-spacing: .08em; text-transform: uppercase;
+}
+
+/* ---------- motion ---------- */
+
+@keyframes rotate { to { transform: rotate(360deg); } }
+@keyframes pulse { 50% { opacity: .35; } }
+@keyframes shimmer { to { background-position: -200% 0; } }
+@keyframes rise { from { opacity: 0; transform: translateY(6px); } }
+@keyframes toast-in { from { opacity: 0; transform: translate(-50%, 8px); } }
+
+.spin { animation: rotate 1.6s linear infinite; color: var(--accent); }
+.rise { animation: rise .22s ease-out both; }
+
+/* A skeleton that moves says "coming"; a grey box says "broken". */
+.shimmer {
+  background: linear-gradient(90deg, var(--panel), var(--panel-2), var(--panel));
+  background-size: 200% 100%;
+  animation: shimmer 1.7s infinite;
+  border-radius: var(--r-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
+
+/* ---------- shell ---------- */
+
+.shell { display: grid; grid-template-columns: var(--rail) 1fr; height: 100%; }
+
+.rail {
+  border-right: 1px solid var(--line);
+  background: var(--panel);
+  padding: 18px 12px;
+  display: flex; flex-direction: column; gap: 3px;
+}
+.rail__head { display: flex; align-items: center; gap: 9px; padding: 4px 8px 16px; }
+.rail__head svg { color: var(--accent); }
+.rail__title { font-size: 14px; }
+.rail__link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px; border-radius: var(--r-sm);
+  background: none; border: 0; cursor: pointer; text-align: left;
+  color: var(--ink-2); position: relative;
+}
+.rail__link:hover { background: var(--hover); color: var(--ink); }
+.rail__link[aria-current="page"] { background: var(--panel-2); color: var(--ink); }
+/* The accent as a 2px edge, not a fill — one of its four appearances. */
+.rail__link[aria-current="page"]::before {
+  content: ""; position: absolute; left: 0; top: 7px; bottom: 7px;
+  width: 2px; border-radius: 2px; background: var(--accent);
+}
+.rail__count { margin-left: auto; font-family: var(--face-mono); font-size: 11px; color: var(--ink-3); }
+.rail__foot { margin-top: auto; }
+
+.main { overflow-y: auto; min-height: 0; }
+/* The studio is a fixed layout that fills the shell; it must not live
+ * inside a scrolling column or its stage has no height to fit into. */
+.main:has(> .studio) { overflow: hidden; }
+.page { max-width: 1000px; margin: 0 auto; padding: 40px 30px 90px; }
+.page__head { margin-bottom: 26px; }
+.page__title { font-size: 27px; }
+.page__sub { color: var(--ink-2); margin-top: 6px; }
+
+/* ---------- pieces ---------- */
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 20px 22px;
+}
+
+.btn {
+  border: 1px solid var(--line-2); background: var(--panel-2); color: var(--ink);
+  border-radius: var(--r-sm); padding: 9px 15px; cursor: pointer;
+}
+.btn:hover:not(:disabled) { border-color: var(--ink-3); }
+.btn--primary { background: var(--accent); color: var(--on-accent); border-color: transparent; }
+.btn--primary:hover:not(:disabled) { filter: brightness(1.06); }
+
+.field {
+  width: 100%; padding: 13px 15px;
+  border: 1px solid var(--line-2); border-radius: var(--r-md);
+  background: var(--sunk); color: var(--ink);
+}
+.field::placeholder { color: var(--ink-3); }
+
+.row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 9px 10px; border-radius: var(--r-sm);
+  border: 0; background: none; width: 100%; text-align: left; cursor: pointer;
+  color: inherit;
+}
+.row:hover { background: var(--hover); }
+.row__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-3); flex: none; }
+.row__dot--ready { background: var(--ok); }
+.row__dot--approved { background: var(--accent); }
+.row__dot--failed { background: var(--bad); }
+/* A pulsing dot is the cheapest honest signal that something is running. */
+.row__dot--working { background: var(--accent); animation: pulse 1.2s infinite; }
+.row__name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.row__meta { font-family: var(--face-mono); font-size: 11px; color: var(--ink-3); flex: none; }
+
+.empty { color: var(--ink-2); padding: 26px 0; }
+.error {
+  border: 1px solid var(--bad); border-radius: var(--r-md);
+  padding: 12px 14px; background: var(--panel);
+}
+
+.toast {
+  position: fixed; left: 50%; bottom: 20px; z-index: 50;
+  transform: translateX(-50%);
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px; border-radius: var(--r-md);
+  border: 1px solid var(--accent-line); background: var(--panel-2);
+  box-shadow: var(--shadow);
+  animation: toast-in .18s ease-out;
+  font-size: 13px;
+}
+
+/* ---------- intake ---------- */
+
+.intake { max-width: 640px; margin: 0 auto; padding: 88px 30px; }
+.intake__title { font-size: 33px; margin-bottom: 10px; }
+.intake__form { display: flex; gap: 10px; margin-top: 24px; }
+.intake__form .field { flex: 1; }
+.intake__note { margin-top: 14px; color: var(--ink-3); font-size: 13px; }
+
+.progress { display: flex; flex-direction: column; gap: 0; margin-top: 26px; }
+.progress__step {
+  display: flex; align-items: center; gap: 11px; padding: 8px 0;
+  color: var(--ink-3); transition: color .3s ease;
+}
+.progress__step--done { color: var(--ink-2); }
+.progress__step--live { color: var(--ink); }
+.progress__pip {
+  width: 8px; height: 8px; border-radius: 50%; flex: none;
+  background: var(--line-2); transition: background .3s ease;
+}
+.progress__step--done .progress__pip { background: var(--ok); }
+.progress__step--live .progress__pip { background: var(--accent); animation: pulse 1.2s infinite; }
+.progress__live {
+  font-family: var(--face-mono); font-size: 12px; color: var(--ink-2);
+  margin-top: 12px; display: flex; align-items: center; gap: 8px;
+}
+
+.evidence {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+/* One tile = a thumbnail with its name UNDER it. The name used to sit inside
+ * the frame, where a path like section-works-where-you-work.jpeg wrapped, got
+ * clipped by the aspect ratio, and left four boxes of cut-off text and no
+ * pictures at all — the images were never rendered in the first place. */
+.evidence__item {
+  margin: 0;
+  display: flex; flex-direction: column; gap: 6px;
+  animation: rise .25s ease-out both;
+  min-width: 0;
+}
+.evidence__shot {
+  display: block; aspect-ratio: 4 / 3; overflow: hidden;
+  border: 1px solid var(--line); border-radius: var(--r-md);
+  background: var(--panel);
+}
+.evidence__shot img {
+  width: 100%; height: 100%; object-fit: cover;
+  object-position: top center;  /* a page screenshot is read from the top */
+  display: block;
+}
+.evidence__pending { display: block; width: 100%; height: 100%; }
+.evidence__label {
+  color: var(--ink-3);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* The kind picker. Selecting is not the same as submitting: these cards used
+ * to fire a request the moment you touched one, which meant you could not
+ * change your mind and could not write a prompt first. */
+.kinds { display: grid; grid-template-columns: repeat(auto-fill, minmax(146px, 1fr)); gap: 8px; }
+.kind {
+  display: flex; flex-direction: column; gap: 3px; text-align: left;
+  padding: 12px 14px; cursor: pointer;
+  background: var(--panel); color: var(--ink);
+  border: 1px solid var(--line); border-radius: var(--r-md);
+}
+.kind:hover:not(:disabled) { border-color: var(--line-2); }
+.kind[aria-pressed="true"] {
+  border-color: var(--accent-line);
+  background: var(--accent-wash);
+}
+.kind__hint { color: var(--ink-3); }
+
+/* A quiet square that only asserts itself on hover — one per asset, so it must
+ * not compete with the thing it belongs to. */
+.icon-btn {
+  display: inline-grid; place-items: center;
+  width: 26px; height: 26px; flex: none;
+  border: 1px solid transparent; border-radius: var(--r-sm);
+  background: none; color: var(--ink-3); cursor: pointer;
+}
+.icon-btn:hover { color: var(--ink); background: var(--hover); border-color: var(--line-2); }
+
+/* ---------- studio ---------- */
+
+/* A fixed three-area page, not a document: title bar across the top, the piece
+ * filling whatever is left, the rail beside it. Nothing scrolls except the
+ * rail's own middle, so the artifact is always whole and always on screen. */
+.studio {
+  height: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-areas: "bar rail" "stage rail";
+}
+
+.studio__bar {
+  grid-area: bar;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--line);
+}
+.studio__ident { min-width: 0; }
+/* Titles come from a prompt, so they can be a sentence. Clamp rather than let
+ * one wrap into three lines and shove the controls off the bar. */
+.studio__title {
+  font-size: 19px;
+  display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.studio__ident .meta { margin-top: 4px; }
+.studio__tools { display: flex; align-items: center; gap: 14px; }
+.studio__building {
+  display: inline-flex; align-items: center; gap: 7px;
+  color: var(--ink-2); font-size: 12px;
+  max-width: 300px; min-width: 0;
+}
+/* The activity line is written by an agent and can be a full sentence. */
+.studio__building span {
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+.studio__stage { grid-area: stage; min-width: 0; min-height: 0; padding: 22px 24px; }
+
+.studio__rail {
+  grid-area: rail;
+  border-left: 1px solid var(--line);
+  background: var(--panel);
+  display: flex; flex-direction: column; min-height: 0;
+}
+.rail-block { padding: 16px 18px; border-bottom: 1px solid var(--line); }
+.rail-block--grow { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 8px; }
+
+/* Label/value pairs, mono on the right so numbers and states line up. */
+.facts { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; margin: 10px 0 0; }
+.facts dt { color: var(--ink-3); font-size: 13px; }
+.facts dd {
+  margin: 0; font-family: var(--face-mono); font-size: 12px;
+  text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+.versions { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.version {
+  display: flex; gap: 10px; align-items: baseline;
+  padding: 6px 8px; border-radius: var(--r-sm);
+}
+.version--current { background: var(--accent-wash); }
+.version__n { color: var(--ink-3); flex: none; }
+.version--current .version__n { color: var(--accent); }
+.version__note {
+  font-size: 13px; color: var(--ink-2); min-width: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+.thread {
+  flex: 1; min-height: 0; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.thread__turn p:last-child { font-size: 14px; margin-top: 3px; }
+
+/* The thing you do over and over sits where your hand already is. */
+.rail-ask { margin-top: auto; padding: 14px 18px 18px; border-top: 1px solid var(--line); }
+.rail-ask__hint { color: var(--ink-3); font-size: 12px; line-height: 1.5; margin-bottom: 9px; }
+.rail-ask__row { display: flex; gap: 8px; }
+.rail-ask__row .field { flex: 1; min-width: 0; padding: 9px 12px; }
+
+@media (max-width: 1040px) {
+  .studio {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(320px, 1fr) auto;
+    grid-template-areas: "bar" "stage" "rail";
+    height: auto;
+  }
+  .studio__rail { border-left: 0; border-top: 1px solid var(--line); }
+}
+
+/* ---------- reading ---------- */
+
+.doc { font-family: var(--face-read); font-size: 16.5px; line-height: 1.62; }
+.doc h1, .doc h2, .doc h3 { font-family: var(--face-ui); margin: 26px 0 10px; }
+.doc p, .doc li { margin: 0 0 12px; }
+.doc code { font-family: var(--face-mono); font-size: 13px; }
+
+@media (max-width: 1040px) { .studio { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 860px) {
+  .shell { grid-template-columns: 1fr; }
+  .rail { display: none; }
+  .page { padding: 26px 16px 70px; }
+}

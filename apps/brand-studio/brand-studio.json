@@ -1,0 +1,6 @@
+{
+  "description": "Get a brand, then make things on it. Intake, the brand kit with its evidence, the studio, and the team's library.",
+  "name": "brand-studio",
+  "public_slug": "${brand_studio_slug}",
+  "visibility": "PUBLIC"
+}

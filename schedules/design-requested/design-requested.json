@@ -1,0 +1,19 @@
+{
+  "account_id": null,
+  "agent_name": "POD_DEFAULT",
+  "config": {
+    "operations": [
+      "INSERT"
+    ],
+    "table_name": "designs"
+  },
+  "connector_trigger_id": null,
+  "filter_instruction": "Fire only when this new row was created by the app rather than during a conversation: created_by is 'app' AND artifact_path is empty. If an assistant created it while talking to someone, it is building it already \u2014 do not fire.",
+  "filter_output_schema": null,
+  "instruction": "A piece was requested from the studio app. Its id is in start.metadata.record_id and the row is in this event. FIRST read /memory/making-a-piece.md in full, then build the piece described by the row's prompt and kind, on the pod's default brand. You are unattended \u2014 never call request_approval or ask_user. Write the row's activity before every step and set working_artifact_path as soon as a first attempt is uploadable, because someone is watching this build on screen. Finish inside ten minutes.",
+  "is_active": true,
+  "name": "design-requested",
+  "schedule_type": "DATASTORE",
+  "visibility": "POD",
+  "workflow_name": null
+}

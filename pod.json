@@ -1,0 +1,15 @@
+{
+  "contents": {
+    "with_files": true
+  },
+  "description": "Gets your brand, then makes things on it. Give it a website; it comes back with your palette, your type and your logos, and then makes real collateral on them.",
+  "format_version": 3,
+  "icon_url": null,
+  "name": "draper",
+  "variables": {
+    "brand_studio_slug": {
+      "description": "Public URL slug for app 'brand-studio' (unique platform-wide; a suffix is added on collision)",
+      "type": "app_slug"
+    }
+  }
+}
