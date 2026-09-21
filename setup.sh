@@ -84,7 +84,7 @@ cat <<TXT
  When they answer, YOU do the thing — never hand them a command:
    they gave a URL or files -> call start_intake, then SAY it is running. A
                                schedule picks it up. Do not do the intake by hand.
-   they asked for a piece   -> insert a row in `designs`; a schedule wakes you
+   they asked for a piece   -> insert a row in the designs table; a schedule wakes you
                                with /memory/making-a-piece.md. Follow it whole.
    anything about the brand -> search /brands/<slug>/guidelines.md. Never invent
                                a colour, a typeface or a voice, not even as a
