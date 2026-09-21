@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>One-pager</title>
+<!-- Brand-neutral by contract — see the note in social-post/index.html. -->
+<link rel="stylesheet" href="theme.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--brand-surface-2); }
+  body { font-family: var(--brand-font-body); color: var(--brand-ink);
+         -webkit-font-smoothing: antialiased; }
+  /* A4 at 96dpi. Prints as one sheet; reads on screen without zooming. */
+  .sheet {
+    width: 794px; min-height: 1123px; margin: 0 auto;
+    background: var(--brand-surface); padding: 64px 72px;
+    display: flex; flex-direction: column; gap: 40px;
+  }
+  .sheet__head { display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--brand-line); padding-bottom: 24px; }
+  .sheet__mark { height: 30px; width: auto; }                        /* slot: logo */
+  .sheet__kicker { font-family: var(--brand-font-mono); font-size: 12px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-muted); }
+  .sheet__title { font-family: var(--brand-font-display); font-size: 46px;
+    line-height: 1.06; letter-spacing: -0.02em; margin: 0; max-width: 22ch; }
+  .sheet__standfirst { font-size: 19px; line-height: 1.55; color: var(--brand-muted);
+    margin: 18px 0 0; max-width: 54ch; }
+  .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .col__h { font-family: var(--brand-font-display); font-size: 17px; margin: 0 0 8px; }
+  .col__b { font-size: 15px; line-height: 1.55; color: var(--brand-muted); margin: 0; }
+  .col { border-top: 2px solid var(--brand-accent); padding-top: 14px; }
+  .note { background: var(--brand-surface-2); border-radius: var(--brand-radius-lg);
+    padding: 26px 30px; font-size: 16px; line-height: 1.6; }
+  .sheet__foot { margin-top: auto; display: flex; justify-content: space-between;
+    border-top: 1px solid var(--brand-line); padding-top: 20px;
+    font-family: var(--brand-font-mono); font-size: 12px; color: var(--brand-muted); }
+</style>
+</head>
+<body>
+  <main class="sheet">
+    <header class="sheet__head">
+      <img class="sheet__mark" src="logo.svg" alt="">
+      <span class="sheet__kicker">Sample &middot; not your brand</span>
+    </header>
+    <div>
+      <h1 class="sheet__title">The 6:14 to Carrickfergus now runs every twenty minutes.</h1>
+      <p class="sheet__standfirst">From 3 November the coastal line moves to a turn-up-and-go timetable. No booking, no seat reservation, and the last train back leaves an hour later than it does today.</p>
+    </div>
+    <section class="cols">
+      <div class="col"><h2 class="col__h">Every 20 minutes</h2><p class="col__b">06:14 to 23:40, seven days. The old pattern held gaps of fifty minutes on Sundays; those are gone.</p></div>
+      <div class="col"><h2 class="col__h">One fare, any train</h2><p class="col__b">Off-peak pricing all day. A single is &pound;4.80 whichever service you board, and returns stay valid for a month.</p></div>
+      <div class="col"><h2 class="col__h">Later last train</h2><p class="col__b">23:40 out of Central, up from 22:35. The 00:10 relief runs on Fridays and Saturdays through the winter.</p></div>
+    </section>
+    <section class="note">You no longer need a timetable for this line. Turn up at the platform and a train will be along inside twenty minutes.</section>
+    <footer class="sheet__foot"><span>meridianrail.example</span><span>Page 1 of 1</span></footer>
+  </main>
+</body>
+</html>

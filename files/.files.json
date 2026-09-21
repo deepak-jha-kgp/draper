@@ -47,6 +47,48 @@
       "path": "/memory/agents/pod-default/piece-pipeline.md",
       "search_enabled": true,
       "visibility": "POD"
+    },
+    {
+      "description": null,
+      "path": "/samples/one-pager.png",
+      "search_enabled": false,
+      "visibility": "POD"
+    },
+    {
+      "description": null,
+      "path": "/samples/one-pager.pdf",
+      "search_enabled": false,
+      "visibility": "POD"
+    },
+    {
+      "description": null,
+      "path": "/samples/social-post.png",
+      "search_enabled": false,
+      "visibility": "POD"
+    },
+    {
+      "description": null,
+      "path": "/samples/one-pager.html",
+      "search_enabled": false,
+      "visibility": "POD"
+    },
+    {
+      "description": null,
+      "path": "/samples/social-post.html",
+      "search_enabled": false,
+      "visibility": "POD"
+    },
+    {
+      "description": null,
+      "path": "/samples/theme.css",
+      "search_enabled": false,
+      "visibility": "POD"
+    },
+    {
+      "description": null,
+      "path": "/samples/logo.svg",
+      "search_enabled": false,
+      "visibility": "POD"
     }
   ]
 }

@@ -1,0 +1,10 @@
+/* Meridian Rail — a made-up company, so nobody mistakes this for their brand. */
+:root{
+  --brand-ink:#14233a; --brand-surface:#ffffff; --brand-surface-2:#f4f1ea;
+  --brand-line:#e0dace; --brand-muted:#5d6b7f; --brand-accent:#b5442a;
+  --brand-accent-ink:#ffffff;
+  --brand-font-display:"Iowan Old Style",Palatino,Georgia,serif;
+  --brand-font-body:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --brand-font-mono:"SFMono-Regular",Menlo,monospace;
+  --brand-radius-sm:3px; --brand-radius-md:5px; --brand-radius-lg:14px; --brand-radius-xl:28px;
+}
